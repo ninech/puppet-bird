@@ -1,0 +1,4 @@
+protocol bgp <%= $title %> from <%= $template %> {
+  source address <%= $source_address %>;
+  neighbor <%= $neighbor_address %> as <%= $neighbor_as %>;
+}

@@ -41,12 +41,40 @@ class { '::bird':
   router_id => '10.18.16.1',
   local_as => 65513,
   self_net => [ '10.18.0.0/16' ],
-  self_public => [ '185.66.195.2/32' ],
+  self_public => [ '185.66.195.3/32' ],
   self_net_public => [ '185.66.195.2/31' ],
   self_net6 => [ 'fd74:fdaa:9dc4::/48' ],
   self_public6 => [ '2a03:2260:1001:1000::/54' ],
   self_net_public6 => [ '2a03:2260:1001::/48' ],
 }
+
+bird::peer ( 'ffrl-ber-a':
+  template => 'uplink',
+  source_address => '100.64.0.45',
+  neighbor_address => '100.64.0.44',
+  neighbor_as => 201701,
+)
+
+bird::peer ( 'ffrl-dus-a':
+  template => 'uplink',
+  source_address => '100.64.0.47',
+  neighbor_address => '100.64.0.46',
+  neighbor_as => 201701,
+)
+
+bird::peer6 ( 'ffrl-ber-a':
+  template => 'uplink',
+  source_address => '2a03:2260:0:1e::2',
+  neighbor_address => '2a03:2260:0:1e::1',
+  neighbor_as => 201701,
+)
+
+bird::peer6 ( 'ffrl-dus-a':
+  template => 'uplink',
+  source_address => '2a03:2260:0:1f::2',
+  neighbor_address => '2a03:2260:0:1f::1',
+  neighbor_as => 201701,
+)
 ```
 
 ## Reference
@@ -63,6 +91,16 @@ class { '::bird':
   * $freiunk\_net (optional, default see manifests/params.pp)
   * $freiunk\_net6 (optional, default see manifests/params.pp)
   * $kernel\_table (optional, default 42)
+* define bird::peer
+  * template
+  * source\_address
+  * neighbor\_address
+  * neighbor\_as
+* define bird::peer6
+  * template
+  * source\_address
+  * neighbor\_address
+  * neighbor\_as
 
 ## Limitations
 
