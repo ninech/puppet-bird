@@ -1,0 +1,63 @@
+# DO NOT CHANGE!
+# This file is puppet generated.
+
+router id <%= $router_id %>;
+define LOCAL_AS = <%= $local_as %>;
+
+function is_default() {
+  return (net ~ [ 0.0.0.0/0 ]);
+}
+function is_freifunk() {
+  return (net ~ [ <%= join($freifunk_net_plus, ',\n    ') %> ]);
+}
+function is_self_net() {
+  return (net ~ [ <%= join($self_net_plus, ',\n    ') %> ]);
+}
+function is_self_public() {
+  return (net ~ [ <%= join($self_public_plus, ',\n    ') %> ]);
+}
+function is_self_net_public() {
+  return (net ~ [ <%= join($self_net_public_plus, ',\n    ') %> ]);
+}
+
+# This pseudo-protocol watches all interface up/down events.
+protocol device {
+  scan time 10;
+}
+
+protocol kernel {
+  scan time 20;
+  kernel table <%= $kernel_table %>;
+  import none;
+  export all;
+}
+
+# Do not import routes for our local networks
+protocol static local_networks {
+  <% ($self_net
+      + $self_public
+      + $self_net_public).each | $value | { -%>
+  route <%= $value %> reject;
+  <% } -%>
+}
+
+template bgp ibgp {
+  local as LOCAL_AS;
+  import all;
+  export where (source = RTS_BGP);
+  next hop self;
+}
+
+template bgp uplink {
+  local as LOCAL_AS;
+  import where is_default();
+  export where is_self_public() || is_self_net_public();
+}
+
+template bgp icvpn {
+  local <%= $icvpn_source_ip %> as LOCAL_AS;
+  import where (is_freifunk() && !is_self_net());
+  export where is_freifunk();
+}
+
+include "peers.d/*.conf";
