@@ -2,7 +2,7 @@
   "name": "ffnw-bird",
   "version": "0.1.0",
   "author": "Simon Kurka",
-  "summary": "This module manages bird for the Freifunk Nordwest network.",
+  "summary": "This module creates a configuration structure for the bird routing daemon.",
   "license": "GPLv2",
   "source": "https://github.com/ffnw/puppet-bird.git",
   "project_page": "https://github.com/ffnw/puppet-bird",
