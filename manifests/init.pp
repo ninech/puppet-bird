@@ -8,7 +8,7 @@ class bird (
 
   class { '::bird::install': } ->
   class { '::bird::config': } ~>
-  class { '::bird::service': } ->
+  class { '::bird::service': }
 
 }
 
