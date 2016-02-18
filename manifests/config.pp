@@ -1,5 +1,7 @@
 class bird::config inherits bird {
 
+  require router
+
   file {
     '/etc/bird/bird.conf.d/':
       ensure => directory,
