@@ -15,5 +15,16 @@ protocol kernel {
   export all;
 }
 
+function is_private_ip() {
+  return net ~ [
+    fc00::/7+,
+    fe80::/10+
+  ];
+}
+
+function is_public_ip() {
+  return !is_private_ip();
+}
+
 include "bird6.conf.d/*.conf";
 

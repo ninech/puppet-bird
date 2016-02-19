@@ -15,5 +15,19 @@ protocol kernel {
   export all;
 }
 
+function is_private_ip() {
+  return net ~ [
+    10.0.0.0/8+,
+    172.16.0.0/12+,
+    192.168.0.0/16+,
+    100.64.0.0/10+,
+    169.254.0.0/16+
+  ];
+}
+
+function is_public_ip() {
+  return !is_private_ip();
+}
+
 include "bird.conf.d/*.conf";
 
