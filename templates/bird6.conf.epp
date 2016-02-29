@@ -1,3 +1,6 @@
+<%- | $router_id,
+      $kernel_table,
+| -%>
 # DO NOT EDIT!
 # This file is puppet generated.
 
