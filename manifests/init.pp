@@ -1,5 +1,6 @@
 class bird (
   String $router_id,
+  String $kernel_table = $bird::params::kernel_table,
 ) inherits bird::params {
 
   class { 'bird::install': } ->
