@@ -1,5 +1,6 @@
 <%- | $router_id,
       $kernel_table,
+      $direct_interfaces,
 | -%>
 # DO NOT EDIT!
 # This file is puppet generated.
@@ -12,6 +13,7 @@ protocol device {
 }
 
 protocol direct {
+  interface <%= join($direct_interfaces.map | $value | { "\"${value}\"" }, ', ') %>;
   import all;
 }
 

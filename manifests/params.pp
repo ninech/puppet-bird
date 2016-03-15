@@ -1,5 +1,6 @@
 class bird::params {
 
-  $kernel_table = '42'
+  $kernel_table      = '42'
+  $direct_interfaces = [ '*' ]
 
 }

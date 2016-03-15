@@ -11,7 +11,11 @@ class bird::config inherits bird {
     '/etc/bird/bird.conf':
       ensure  => file,
       mode    => '0644',
-      content => epp('bird/bird.conf.epp', { router_id => $router_id, kernel_table => $kernel_table });
+      content => epp('bird/bird.conf.epp', {
+        router_id         => $router_id,
+        kernel_table      => $kernel_table,
+        direct_interfaces => $_direct_interfaces,
+      });
   }
 
   file {
@@ -23,7 +27,11 @@ class bird::config inherits bird {
     '/etc/bird/bird6.conf':
       ensure  => file,
       mode    => '0644',
-      content => epp('bird/bird6.conf.epp', { router_id => $router_id, kernel_table => $kernel_table });
+      content => epp('bird/bird6.conf.epp', {
+        router_id         => $router_id,
+        kernel_table      => $kernel_table,
+        direct_interfaces => $direct_interfaces,
+      });
   }
 
 }

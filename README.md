@@ -36,7 +36,9 @@ class { '::bird':
 ## Reference
 
 * class bird
-  * $router\_id
+  * router_id
+  * kernel_table (optional, default '42')
+  * direct_interfaces (optional, default [ '*' ])
 
 ## Limitations
 
