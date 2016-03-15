@@ -14,7 +14,7 @@ class bird::config inherits bird {
       content => epp('bird/bird.conf.epp', {
         router_id         => $router_id,
         kernel_table      => $kernel_table,
-        direct_interfaces => $_direct_interfaces,
+        direct_interfaces => $direct_interfaces,
       });
   }
 
