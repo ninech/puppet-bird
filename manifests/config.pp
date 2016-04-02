@@ -15,6 +15,7 @@ class bird::config inherits bird {
         router_id         => $router_id,
         kernel_table      => $kernel_table,
         direct_interfaces => $direct_interfaces,
+        source            => $source,
       });
   }
 
@@ -31,6 +32,7 @@ class bird::config inherits bird {
         router_id         => $router_id,
         kernel_table      => $kernel_table,
         direct_interfaces => $direct_interfaces,
+        source6           => $source6,
       });
   }
 

@@ -1,6 +1,7 @@
 <%- | $router_id,
       $kernel_table,
       $direct_interfaces,
+      $source,
 | -%>
 # DO NOT EDIT!
 # This file is puppet generated.
@@ -22,7 +23,10 @@ protocol kernel {
   scan time 20;
   kernel table <%= $kernel_table %>;
   import none;
-  export all;
+  export filter {
+    krt_prefsrc = <%= $source %>;
+    accept;
+  };
 }
 
 function is_private_ip() {

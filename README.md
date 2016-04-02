@@ -22,6 +22,8 @@ To setup this module call the bird class and set the router id. Other modules ca
 ```puppet
 class { '::bird':
   router_id => '10.18.16.1',
+  source    => '10.18.1.2',
+  source6   => 'fd74:fdaa:9dc4:102::1',
 )
 ```
 
@@ -30,6 +32,8 @@ class { '::bird':
 ```puppet
 class { '::bird':
   router_id => '10.18.16.1',
+  source    => '10.18.1.2',
+  source6   => 'fd74:fdaa:9dc4:102::1',
 )
 ```
 
@@ -37,6 +41,8 @@ class { '::bird':
 
 * class bird
   * router_id
+  * source
+  * source6
   * kernel_table (optional, default '42')
   * direct_interfaces (optional, default [ '*' ])
 
