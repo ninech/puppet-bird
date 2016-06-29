@@ -1,0 +1,52 @@
+# THIS FILE IS MANAGED BY PUPPET, CHANGES WILL BE OVERWRITTEN WITHOUT FURTHER NOTICE
+
+# Configure logging
+log syslog { debug, trace, info, remote, warning, error, auth, fatal, bug };
+log stderr all;
+log "/var/log/bird.log" all;
+
+# Override router ID
+router id <%= @router_id %>;
+
+# This pseudo-protocol watches all interface up/down events.
+protocol device {
+  scan time 10;
+}
+
+# Include directly connected networks
+protocol direct {
+  interface <%= @direct_interfaces.map { |value| "\"#{value}\"" }.join(', ') %>;
+  import all;
+}
+
+<% if @kernel_table -%>
+protocol kernel {
+  device routes;
+  scan time 20;
+  kernel table <%= @kernel_table %>;
+  import none;
+  export filter {
+    krt_prefsrc = <%= @source6 %>;
+    accept;
+  };
+}
+<% else -%>
+protocol kernel {
+  persist;                # Don't remove routes on BIRD shutdown
+  scan time 20;           # Scan kernel routing table every 20 seconds
+  export all;             # Default is export none
+}
+<% end -%>
+
+function is_private_ip() {
+  return net ~ [
+    fc00::/7+,
+    fe80::/10+
+  ];
+}
+
+function is_public_ip() {
+  return !is_private_ip();
+}
+
+include "/etc/bird/bird6.conf.d/*.conf";

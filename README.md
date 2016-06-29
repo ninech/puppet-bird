@@ -19,12 +19,13 @@ This module creates a configuration structure for the bird routing daemon.
 ### Beginning with bird
 
 To setup this module call the bird class and set the router id. Other modules can be set up on top of this using configuration files in /etc/bird/bird.conf.d/ or /etc/bird/bird6.conf.d/.
+
 ```puppet
 class { '::bird':
   router_id => '10.18.16.1',
   source    => '10.18.1.2',
   source6   => 'fd74:fdaa:9dc4:102::1',
-)
+}
 ```
 
 ## Usage
@@ -34,7 +35,7 @@ class { '::bird':
   router_id => '10.18.16.1',
   source    => '10.18.1.2',
   source6   => 'fd74:fdaa:9dc4:102::1',
-)
+}
 ```
 
 ## Reference
@@ -50,6 +51,7 @@ class { '::bird':
 
 ### OS compatibility
 * Debian 8
+* Ubuntu 14.04 and 16.04
 
 ## Development
 

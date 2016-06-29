@@ -1,6 +1,23 @@
+# == Class: bird::params
+#
+# This class is called from bird for defaults.
+#
+# === Authors
+#
+# Simon Kurka (https://github.com/simonkurka)
+# Roman Plessl <roman.plessl@nine.ch>
+#
+# === Copyright
+#
+# Copyirght 2016 Simon Kurka (https://github.com/simonkurka)
+# Copyright 2016 Nine Internet Solutions AG, Roman Plessl
+#
 class bird::params {
-
-  $kernel_table      = '42'
-  $direct_interfaces = [ '*' ]
-
+  $ensure             = 'installed'
+  $version            = '1.5.0-4'
+  $config_template_v4 = 'bird/bird.conf.erb'
+  $config_template_v6 = 'bird/bird6.conf.erb'
+  #
+  $kernel_table       = undef
+  $direct_interfaces  = [ '*' ]
 }

@@ -1,15 +1,15 @@
 {
-  "name": "ffnw-bird",
-  "version": "0.1.0",
-  "author": "Simon Kurka",
+  "name": "ninech-bird",
+  "version": "0.1.1",
+  "author": "Roman Plessl",
   "summary": "This module creates a configuration structure for the bird routing daemon.",
   "license": "GPLv2",
-  "source": "https://github.com/ffnw/puppet-bird.git",
-  "project_page": "https://github.com/ffnw/puppet-bird",
-  "issues_url": "https://github.com/ffnw/puppet-bird/issues",
+  "source": "https://github.com/ninech/puppet-bird.git",
+  "project_page": "https://github.com/ninech/puppet-bird",
+  "issues_url": "https://github.com/ninech/puppet-bird/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-    {"name":"ffnw-router","version_requirement":">= 0.1.0"}
+    { "name":"puppetlabs-stdlib",
+      "version_requirement":">= 1.0.0" },
   ],
   "data_provider": null
 }

@@ -1,6 +1,18 @@
+# == Class: bird::config
+#
+# This class is called from bird for configuration.
+#
+# === Authors
+#
+# Simon Kurka (https://github.com/simonkurka)
+# Roman Plessl <roman.plessl@nine.ch>
+#
+# === Copyright
+#
+# Copyirght 2016 Simon Kurka (https://github.com/simonkurka)
+# Copyright 2016 Nine Internet Solutions AG, Roman Plessl
+#
 class bird::config inherits bird {
-
-  include router
 
   file {
     '/etc/bird/bird.conf.d/':
@@ -11,12 +23,7 @@ class bird::config inherits bird {
     '/etc/bird/bird.conf':
       ensure  => file,
       mode    => '0644',
-      content => epp('bird/bird.conf.epp', {
-        router_id         => $router_id,
-        kernel_table      => $kernel_table,
-        direct_interfaces => $direct_interfaces,
-        source            => $source,
-      });
+      content => template($::bird::config_template_v4),
   }
 
   file {
@@ -28,12 +35,7 @@ class bird::config inherits bird {
     '/etc/bird/bird6.conf':
       ensure  => file,
       mode    => '0644',
-      content => epp('bird/bird6.conf.epp', {
-        router_id         => $router_id,
-        kernel_table      => $kernel_table,
-        direct_interfaces => $direct_interfaces,
-        source6           => $source6,
-      });
+      content => template($::bird::config_template_v6),
   }
 
 }
