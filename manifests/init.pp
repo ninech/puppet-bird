@@ -37,10 +37,17 @@
 #
 class bird (
   $router_id,
-  $source,
-  $source6,
+  $source            = $::bird::params::source,
+  $source6           = $::bird::params::source6,
+  $ensure            = $::bird::params::ensure,
+  $version           = $::bird::params::version,
   $kernel_table      = $::bird::params::kernel_table,
   $direct_interfaces = $::bird::params::direct_interfaces,
+  $logfile           = $::bird::params::logfile,
+  $logfile_owner     = $::bird::params::logfile_owner,
+  $logfile_group     = $::bird::params::logfile_group,
+  $user              = $::bird::params::user,
+  $group             = $::bird::params::group,
 ) inherits ::bird::params
 {
 

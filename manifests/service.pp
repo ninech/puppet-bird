@@ -35,16 +35,37 @@ class bird::service inherits bird {
     }
     'Ubuntu': {
       service { 'bird':
-        ensure      => 'running',
-        enable      => true,
-        hasstatus   => false,
-        restart     => '/usr/sbin/birdc configure',
-        require     => Package['bird'],
-        subscribe   => File['/etc/bird/bird.conf'];
+        ensure    => 'running',
+        enable    => true,
+        hasstatus => false,
+        restart   => '/usr/sbin/birdc configure',
+        require   => Package['bird'],
+        subscribe => File['/etc/bird/bird.conf'];
       }
     }
     default: {
       fail("Bird not supported on ${::operatingsystem} - Only Debian and Ubuntu are supported at this time")
     }
   }
+
+  # activate PID
+  file_line { 'bird_pid':
+    path  => '/etc/bird/envvars',
+    line  => 'BIRD_ARGS=\'-P /var/run/bird/bird.pid\'',
+    match => '^BIRD_ARGS=';
+  }
+
+  # allow write permissions for logfiles and rotate logfile
+  if $bird::logfile {
+    file {
+      $bird::logfile:
+        ensure => present,
+        owner  => $::bird::logfile_user,
+        group  => $::bird::logfile_group;
+      '/etc/logrotate.d/bird':
+        content => template('bird/logrotate.conf.erb');
+    }
+
+  }
+
 }

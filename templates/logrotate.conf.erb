@@ -1,0 +1,12 @@
+# THIS FILE IS MANAGED BY PUPPET, CHANGES WILL BE OVERWRITTEN
+
+<%= @logfile %> {
+    weekly
+    rotate 12
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 640 <%= @logfile_user %> <%= @logfile_group %>
+    sharedscripts
+}

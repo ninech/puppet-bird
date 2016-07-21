@@ -18,6 +18,16 @@ class bird::params {
   $config_template_v4 = 'bird/bird.conf.erb'
   $config_template_v6 = 'bird/bird6.conf.erb'
   #
+  $source             = '10.42.42.1'
+  $source6            = 'fd6a:fbee:cc95:df4d::1'
+  #
   $kernel_table       = undef
   $direct_interfaces  = [ '*' ]
+  #
+  $logfile            = '/var/log/bird.log'
+  $logfile_user       = 'bird'
+  $logfile_group      = 'adm'
+  #
+  $user               = 'bird'
+  $group              = 'bird'
 }
