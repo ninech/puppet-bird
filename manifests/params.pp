@@ -15,6 +15,9 @@
 class bird::params {
   $ensure             = 'installed'
   $version            = '1.5.0-4'
+  $service_ensure     = 'running',
+  $service_enable     = true,
+  #
   $config_template_v4 = 'bird/bird.conf.erb'
   $config_template_v6 = 'bird/bird6.conf.erb'
   #

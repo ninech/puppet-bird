@@ -37,10 +37,12 @@
 #
 class bird (
   $router_id,
-  $source            = $::bird::params::source,
-  $source6           = $::bird::params::source6,
   $ensure            = $::bird::params::ensure,
   $version           = $::bird::params::version,
+  $service_ensure    = $::bird::params::service_ensure,
+  $service_enable    = $::bird::params::service_enable,
+  $source            = $::bird::params::source,
+  $source6           = $::bird::params::source6,
   $kernel_table      = $::bird::params::kernel_table,
   $direct_interfaces = $::bird::params::direct_interfaces,
   $logfile           = $::bird::params::logfile,
