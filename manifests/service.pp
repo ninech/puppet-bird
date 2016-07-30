@@ -14,19 +14,31 @@
 #
 class bird::service inherits bird {
 
+  # map the word 'unmanaged' to an undef state so that we can control
+  # what puppet should manage
+  $service_ensure = $::bird::service_ensure ? {
+    'unmanaged' => undef,
+    default     => $::bird::service_ensure,
+  }
+
+  $service_enable = $::bird::service_enable ? {
+    'unmanaged' => undef,
+    default     => $::bird::service_enable,
+  }
+
   case $::operatingsystem {
     'Debian': {
       service { 'bird':
-        ensure    => $::bird::service_ensure,
-        enable    => $::bird::service_enable,
+        ensure    => $service_ensure,
+        enable    => $service_enable,
         hasstatus => true,
         restart   => '/usr/sbin/birdc configure',
         require   => Package['bird'],
         subscribe => File['/etc/bird/bird.conf'];
       }
       service { 'bird6':
-        ensure    => $::bird::service_ensure,
-        enable    => $::bird::service_enable,
+        ensure    => $service_ensure,
+        enable    => $service_enable,
         hasstatus => true,
         restart   => '/usr/sbin/birdc6 configure',
         require   => Package['bird6'],
@@ -35,8 +47,8 @@ class bird::service inherits bird {
     }
     'Ubuntu': {
       service { 'bird':
-        ensure    => $::bird::service_ensure,
-        enable    => $::bird::service_enable,
+        ensure    => $service_ensure,
+        enable    => $service_enable,
         hasstatus => true,
         restart   => '/usr/sbin/birdc configure',
         require   => Package['bird'],
